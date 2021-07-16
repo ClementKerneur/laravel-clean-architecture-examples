@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 class UploadNewAvatarTest extends TestCase implements UploadNewAvatarPresenterInterface
 {
     public UploadNewAvatarResponse $response;
-    
+
     public function presents(UploadNewAvatarResponse $response): void
     {
         $this->response = $response;
@@ -29,5 +29,20 @@ class UploadNewAvatarTest extends TestCase implements UploadNewAvatarPresenterIn
         $useCase->execute($request, $this);
 
         $this->assertNotNull($this->response->error);
+    }
+
+    public function test_the_response_has_a_success_message_if_user_has_less_than_4_avatars()
+    {
+        $storage = new AvatarsStorageAdapter();
+        $useCase = new UploadNewAvatar($storage);
+        $request = new UploadNewAvatarRequest();
+
+        $request->username = "has_3_avatars";
+        $request->avatarContent = "new avatar";
+
+        $useCase->execute($request, $this);
+
+        $this->assertNotNull($this->response->success);
+        $this->assertContains("new avatar", $storage->avatars[$request->username]);
     }
 }
