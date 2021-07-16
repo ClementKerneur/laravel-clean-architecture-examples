@@ -18,7 +18,7 @@ class UploadNewAvatarTest extends TestCase implements UploadNewAvatarPresenterIn
         $this->response = $response;
     }
 
-    public function test_the_response_has_an_error_if_user_already_has_at_least_4_avatar()
+    public function test_the_response_has_an_error_and_it_does_not_upload_if_user_already_has_at_least_4_avatar()
     {
         $storage = new AvatarsStorageAdapter();
         $useCase = new UploadNewAvatar($storage);
@@ -34,7 +34,7 @@ class UploadNewAvatarTest extends TestCase implements UploadNewAvatarPresenterIn
         $this->assertCount(5, $storage->avatars["has_5_avatars"]);
     }
 
-    public function test_the_response_has_a_success_message_if_user_has_less_than_4_avatars()
+    public function test_the_response_has_a_success_message_and_it_uploads_if_user_has_less_than_4_avatars()
     {
         $storage = new AvatarsStorageAdapter();
         $useCase = new UploadNewAvatar($storage);
