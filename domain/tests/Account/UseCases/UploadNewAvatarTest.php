@@ -25,10 +25,13 @@ class UploadNewAvatarTest extends TestCase implements UploadNewAvatarPresenterIn
         $request = new UploadNewAvatarRequest();
 
         $request->username = "has_5_avatars";
+        $request->avatarContent = "new avatar";
 
         $useCase->execute($request, $this);
 
         $this->assertNotNull($this->response->error);
+        $this->assertNotContains("new avatar", $storage->avatars["has_5_avatars"]);
+        $this->assertCount(5, $storage->avatars["has_5_avatars"]);
     }
 
     public function test_the_response_has_a_success_message_if_user_has_less_than_4_avatars()
@@ -43,6 +46,7 @@ class UploadNewAvatarTest extends TestCase implements UploadNewAvatarPresenterIn
         $useCase->execute($request, $this);
 
         $this->assertNotNull($this->response->success);
-        $this->assertContains("new avatar", $storage->avatars[$request->username]);
+        $this->assertContains("new avatar", $storage->avatars["has_3_avatars"]);
+        $this->assertCount(4, $storage->avatars["has_3_avatars"]);
     }
 }
