@@ -23,6 +23,8 @@ class UploadNewAvatar
             return;
         }
 
+        $this->avatarsStorage->uploadAndAddNewAvatarToUser($request->avatarContent, $request->username);
+        $response->success = "{$request->username} successfully uploaded a new avatar";
         $presenter->presents($response);
     }
 }
