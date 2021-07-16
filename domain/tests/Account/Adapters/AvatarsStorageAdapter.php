@@ -16,7 +16,7 @@ class AvatarsStorageAdapter implements AvatarsStoragePort
         return count($this->avatars[$username]);
     }
 
-    public function uploadAndAddNewAvatarToUser(string $avatarContent, string $username): void
+    public function uploadAvatarToUser(string $avatarContent, string $username): void
     {
         $this->avatars[$username][] = $avatarContent;
     }
