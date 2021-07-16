@@ -1,0 +1,20 @@
+@startuml
+
+User -> UserInterface     : Send HTTP Request
+activate UserInterface
+UserInterface -> Domain   : Execute use case
+activate Domain
+Domain -> Infrastructure : Current user has less than 4 avatars?
+
+alt Yes
+    Infrastructure -> Domain : Authorize upload
+    Domain -> Infrastructure : Store uploaded image
+    Infrastructure -> Domain : Return Success
+else No
+    Infrastructure -> Domain : Forbid upload
+end
+UserInterface -> Domain : Prepare response
+UserInterface -> User : Send HTTP Response
+
+deactivate UserInterface
+@enduml

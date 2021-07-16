@@ -1,0 +1,9 @@
+@startuml
+
+left to right direction
+
+actor :Utilisateur connecté: as user
+
+user --> (Add a new avatar to user's collection)
+
+@enduml
