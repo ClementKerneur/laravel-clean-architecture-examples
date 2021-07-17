@@ -6,10 +6,7 @@ use Domain\Account\Ports\AvatarsStoragePort;
 
 class AvatarsStorageAdapter implements AvatarsStoragePort
 {
-    public array $avatars = [
-        "has_5_avatars" => ["1", "2", "3", "4", "5"],
-        "has_3_avatars" => ["1", "2", "3"]
-    ];
+    public array $avatars = [];
 
     public function getAmountOfAvatarsForUsername(string $username): int
     {
@@ -19,5 +16,10 @@ class AvatarsStorageAdapter implements AvatarsStoragePort
     public function uploadAvatarToUser(string $avatarContent, string $username): void
     {
         $this->avatars[$username][] = $avatarContent;
+    }
+
+    public function setAvatarsOf(string $username, array $avatars): void
+    {
+        $this->avatars[$username] = $avatars;
     }
 }
