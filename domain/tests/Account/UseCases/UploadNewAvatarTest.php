@@ -24,6 +24,7 @@ class UploadNewAvatarTest extends TestCase implements UploadNewAvatarPresenterIn
         $useCase = new UploadNewAvatar($storage);
         $request = new UploadNewAvatarRequest();
 
+        $storage->setAvatarsOf("has_5_avatars", ["1", "2", "3", "4", "5"]);
         $request->username = "has_5_avatars";
         $request->avatarContent = "new avatar";
 
@@ -40,6 +41,7 @@ class UploadNewAvatarTest extends TestCase implements UploadNewAvatarPresenterIn
         $useCase = new UploadNewAvatar($storage);
         $request = new UploadNewAvatarRequest();
 
+        $storage->setAvatarsOf("has_3_avatars", ["1", "2", "3"]);
         $request->username = "has_3_avatars";
         $request->avatarContent = "new avatar";
 
