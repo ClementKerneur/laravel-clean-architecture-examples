@@ -1,0 +1,8 @@
+version: "3.3"
+services:
+  unit-tests:
+    build: .
+    volumes:
+      - ".:/app"
+    working_dir: /app
+    command: "bash -c 'composer install && php artisan test --help domain/tests/*'"
